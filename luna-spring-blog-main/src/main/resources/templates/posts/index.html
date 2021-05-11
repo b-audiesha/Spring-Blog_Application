@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luna Blog: All Posts</title>
+    <th:block th:replace="partials/styles :: styles" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <nav th:replace="partials/navbar :: navbar"></nav>
+    <header th:replace="partials/header :: header('View All Posts')"></header>
+
+    <!-- use thymeleaf to dynamically create the html for each post -->
+    <main class="container mb-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12" th:each="post : ${posts}">
+                <div class="card p-1 my-2 card-styling">
+                    <h3><a th:href="'/posts/' + ${post.id}" th:text="${post.title}"></a></h3>
+                    <p th:text="${#strings.substring(post.body,0,30)} + '...'"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="partials/footer :: footer"></footer>
+
+    <th:block th:replace="partials/scripts :: scripts" />
+
+</body>
+</html>
